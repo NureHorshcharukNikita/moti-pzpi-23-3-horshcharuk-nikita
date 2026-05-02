@@ -1,0 +1,113 @@
+﻿@model Lab2.Models.CompareViewModel
+
+@{
+    ViewData["Title"] = "Compare cards";
+}
+
+<h2 class="text-center mb-4">Pairwise comparison</h2>
+
+<div class="row mb-2">
+
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+
+                <h4>@Model.Card1.CardName</h4>
+                <p>@Model.Card1.CardDescription</p>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Effect</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var e in Model.Effects1)
+                        {
+                            <tr>
+                                <td>@e.Effect.EffectName</td>
+                                <td>@e.Value</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="card-footer text-center">
+                <form method="post" asp-action="Vote">
+                    <input type="hidden" name="winner" value="1" />
+                    <input type="hidden" name="step" value="@Model.Step" />
+                    <button class="btn btn-primary w-100">
+                        Choose @Model.Card1.CardName
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="card shadow-sm h-100">
+            <div class="card-body">
+
+                <h4>@Model.Card2.CardName</h4>
+                <p>@Model.Card2.CardDescription</p>
+
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>Effect</th>
+                            <th>Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var e in Model.Effects2)
+                        {
+                            <tr>
+                                <td>@e.Effect.EffectName</td>
+                                <td>@e.Value</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="card-footer text-center">
+                <form method="post" asp-action="Vote">
+                    <input type="hidden" name="winner" value="2" />
+                    <input type="hidden" name="step" value="@Model.Step" />
+                    <button class="btn btn-primary w-100">
+                        Choose @Model.Card2.CardName
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<div class="text-center mt-3">
+
+    <form method="post" asp-action="Vote" class="d-inline me-2">
+        <input type="hidden" name="winner" value="0" />
+        <input type="hidden" name="step" value="@Model.Step" />
+        <button class="btn btn-secondary px-4">
+            Equal
+        </button>
+    </form>
+
+    <form method="post" asp-action="Vote" class="d-inline">
+        <input type="hidden" name="winner" value="9" />
+        <input type="hidden" name="step" value="@Model.Step" />
+        <button class="btn btn-warning px-4">
+            Cannot compare
+        </button>
+    </form>
+
+</div>

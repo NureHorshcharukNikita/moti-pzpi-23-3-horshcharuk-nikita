@@ -1,0 +1,44 @@
+﻿@model Lab2.Models.CardEffect
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>CardEffect</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CardEffectID" />
+            <div class="form-group">
+                <label asp-for="CardID" class="control-label"></label>
+                <select asp-for="CardID" class="form-control" asp-items="ViewBag.CardID"></select>
+                <span asp-validation-for="CardID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EffectID" class="control-label"></label>
+                <select asp-for="EffectID" class="form-control" asp-items="ViewBag.EffectID"></select>
+                <span asp-validation-for="EffectID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Value" class="control-label"></label>
+                <input asp-for="Value" class="form-control" />
+                <span asp-validation-for="Value" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,40 @@
+## Build
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+
+## Visual Studio / VS Code
+.vs/
+*.user
+*.userosscache
+*.suo
+*.userprefs
+*.rsuser
+
+## JetBrains Rider
+.idea/
+*.sln.iml
+
+## NuGet
+*.nupkg
+**/packages/*
+!**/packages/build/
+
+## Test / coverage
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+*.trx
+coverage*.json
+coverage*.xml
+
+## OS
+.DS_Store
+Thumbs.db

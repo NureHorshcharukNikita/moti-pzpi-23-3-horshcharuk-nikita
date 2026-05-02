@@ -1,0 +1,70 @@
+﻿@model List<Lab2.Models.Effect>
+
+<h2>Weighted Decision</h2>
+
+<form method="post" asp-action="Calculate">
+
+    <table class="table">
+        <tr>
+            <th>Criterion</th>
+            <th>Weight</th>
+            <th>Balanced weight</th>
+        </tr>
+
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <tr>
+                <td>@Model[i].EffectName</td>
+
+                <td>
+                    <input type="number"
+                           name="w_@Model[i].EffectID"
+                           class="form-control weight-input"
+                           step="0.1"
+                           value="1" />
+                </td>
+
+                <td>
+                    <input type="text"
+                           class="form-control balanced-weight"
+                           readonly />
+                </td>
+
+            </tr>
+        }
+
+    </table>
+
+    <button class="btn btn-primary">
+        Calculate
+    </button>
+
+</form>
+
+<script>
+    function updateBalanced() {
+
+        let weights = document.querySelectorAll(".weight-input")
+        let balanced = document.querySelectorAll(".balanced-weight")
+
+        let sum = 0
+
+        weights.forEach(w => sum += parseFloat(w.value || 0))
+
+        weights.forEach((w,i) => {
+
+            let val = parseFloat(w.value || 0)
+
+            if(sum === 0)
+                balanced[i].value = 0
+            else
+                balanced[i].value = (val / sum).toFixed(3)
+
+        })
+    }
+
+    document.querySelectorAll(".weight-input")
+    .forEach(x => x.addEventListener("input", updateBalanced))
+
+    updateBalanced()
+</script>

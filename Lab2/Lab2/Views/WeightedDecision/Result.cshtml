@@ -1,0 +1,60 @@
+﻿@model List<Lab2.Models.WeightedDecisionResultItem>
+@{
+    var details = ViewBag.Details;
+}
+
+<h2>Weighted Decision Result</h2>
+
+@foreach (var card in details)
+{
+    <h4 class="mt-4">@card.CardName</h4>
+
+    <table class="table table-bordered">
+
+        <tr>
+            <th>Criterion</th>
+            <th>Value</th>
+            <th>Etalon</th>
+            <th>Norm</th>
+            <th>Weight</th>
+            <th>Product</th>
+        </tr>
+
+        @foreach (var row in card.Rows)
+        {
+            <tr>
+                <td>@row.Name</td>
+                <td>@row.Value</td>
+                <td>@row.Etalon</td>
+                <td>@row.Norm</td>
+                <td>@row.Weight</td>
+                <td>@row.Product</td>
+            </tr>
+        }
+
+        <tr class="table-success">
+            <td colspan="5"><b>Total</b></td>
+            <td><b>@card.Sum</b></td>
+        </tr>
+
+    </table>
+}
+
+<h3 class="mt-5">Ranking</h3>
+
+<table class="table">
+    <tr>
+        <th>Rank</th>
+        <th>Card</th>
+        <th>Utility</th>
+    </tr>
+
+    @foreach (var r in Model)
+    {
+        <tr>
+            <td>@r.Rank</td>
+            <td>@r.CardName</td>
+            <td>@r.Utility</td>
+        </tr>
+    }
+</table>

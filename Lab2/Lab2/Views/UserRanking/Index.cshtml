@@ -1,0 +1,79 @@
+﻿@model List<Lab2.Models.RankInput>
+
+@{
+    ViewData["Title"] = "Rank Cards";
+    bool isEdit = ViewBag.Edit != null && (bool)ViewBag.Edit;
+}
+
+<h2>Rank Cards</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Success"]
+    </div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div style="color:red">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<form asp-action="Save" method="post">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Card</th>
+                <th>Rank</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model[i].CardName
+                        <input type="hidden" name="[@i].CardID" value="@Model[i].CardID" />
+                    </td>
+                    <td>
+                        @if (isEdit)
+                        {
+                            <select name="[@i].Rank" class="form-control">
+                                @for (int j = 1; j <= Model.Count; j++)
+                                {
+                                    <option value="@j" selected="@(Model[i].Rank == j)">
+                                        @j
+                                    </option>
+                                }
+                            </select>
+                        }
+                        else
+                        {
+                            <span>
+                                @(Model[i].Rank == 0 ? "-" : Model[i].Rank.ToString())
+                            </span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- КНОПКИ -->
+    @if (!isEdit)
+    {
+        <a asp-action="Index" asp-route-edit="true" class="btn btn-warning">
+            Edit
+        </a>
+    }
+    else
+    {
+        <button type="submit" class="btn btn-primary">Save Ranking</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    }
+</form>

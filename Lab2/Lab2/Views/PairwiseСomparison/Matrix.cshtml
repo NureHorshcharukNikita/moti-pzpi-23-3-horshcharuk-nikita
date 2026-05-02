@@ -1,0 +1,105 @@
+﻿@{
+    var cards = ViewBag.Cards as List<Lab2.Models.Card>;
+
+    double[,] adjacency = ViewBag.Adjacency;
+    int[,] incidence = ViewBag.Incidence;
+
+    int comparisons = ViewBag.Comparisons;
+    var ranking = ViewBag.Ranking;
+}
+
+@{
+    ViewData["Title"] = "Matrix";
+}
+
+<h2 class="mt-5 mb-3">Incidence matrix</h2>
+
+<table class="table table-bordered text-center">
+
+    <thead>
+        <tr>
+            <th>Card</th>
+            @for (int j = 0; j < comparisons; j++)
+            {
+                <th>C@(j + 1)</th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @for (int i = 0; i < cards.Count; i++)
+        {
+            <tr>
+
+                <th>@cards[i].CardName</th>
+
+                @for (int j = 0; j < comparisons; j++)
+                {
+                    <td>@incidence[i, j]</td>
+                }
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<h2 class="mb-3">Adjacency matrix</h2>
+
+<table class="table table-bordered text-center">
+
+    <thead>
+        <tr>
+            <th></th>
+            @foreach (var c in cards)
+            {
+                <th>@c.CardName</th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @for (int i = 0; i < cards.Count; i++)
+        {
+            <tr>
+
+                <th>@cards[i].CardName</th>
+
+                @for (int j = 0; j < cards.Count; j++)
+                {
+                    if (i == j)
+                    {
+                        <td>-</td>
+                    }
+                    else
+                    {
+                        <td>@adjacency[i, j]</td>
+                    }
+                }
+
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<h3 class="mt-5">Ranking</h3>
+
+<table class="table table-striped">
+
+    <tr>
+        <th>Rank</th>
+        <th>Card</th>
+    </tr>
+
+    @foreach (var r in ranking)
+    {
+        <tr>
+            <td>@r.Rank</td>
+            <td>@r.CardName</td>
+        </tr>
+    }
+
+</table>

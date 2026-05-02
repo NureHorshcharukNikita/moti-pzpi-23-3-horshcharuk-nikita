@@ -1,0 +1,64 @@
+﻿@model Lab2.Models.Effect
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Effect</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EffectCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EffectCode)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EffectName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EffectName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EffectDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EffectDescription)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Etalon)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Etalon)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="EffectID" />
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>
+
+@if (TempData["Error"] != null)
+{
+    <div style="color:red; font-weight:bold;">
+        @TempData["Error"]
+    </div>
+}

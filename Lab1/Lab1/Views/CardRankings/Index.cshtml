@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Lab1.Models.CardRanking>
+
+@{
+    ViewData["Title"] = "CardRankings";
+}
+
+<h1>CardRankings</h1>
+
+<form method="get">
+    <input type="text" name="searchString" placeholder="Search (Card/User)" />
+    <input type="number" name="maxRank" placeholder="Max rank" />
+    <input type="submit" value="Apply" />
+</form>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSort"]">
+                    Card
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlternativeRank)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Card.CardName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlternativeRank)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.RankingID">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.RankingID">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.RankingID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

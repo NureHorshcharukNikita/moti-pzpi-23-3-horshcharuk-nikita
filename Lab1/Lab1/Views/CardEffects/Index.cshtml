@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Lab1.Models.CardEffect>
+
+@{
+    ViewData["Title"] = "CardEffects";
+}
+
+<h1>CardEffects</h1>
+
+<form method="get">
+    <input type="text" name="searchString" placeholder="Search (Card/Effect)" />
+    <input type="number" name="minValue" placeholder="Min value" />
+    <input type="submit" value="Apply" />
+</form>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSort"]">
+                    Card
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Effect)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Value)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Card.CardName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Effect.EffectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CardEffectID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CardEffectID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CardEffectID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

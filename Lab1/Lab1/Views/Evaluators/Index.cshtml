@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Lab1.Models.Evaluator>
+
+@{
+    ViewData["Title"] = "Evaluators";
+}
+
+<h1>Evaluators</h1>
+
+<form method="get">
+    <input type="text" name="searchString" placeholder="Search..." />
+    <input type="number" name="minRank" placeholder="Min competence" />
+    <input type="submit" value="Apply" />
+</form>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSort"]">
+                    @Html.DisplayNameFor(model => model.EvaluatorName)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompetenceRank)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EvaluatorName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompetenceRank)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EvaluatorID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EvaluatorID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EvaluatorID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Lab1.Models.Effect>
+
+@{
+    ViewData["Title"] = "Effects";
+}
+
+<h1>Effects</h1>
+
+<form method="get">
+    <input type="text" name="searchString" placeholder="Search..." />
+    <input type="submit" value="Search" />
+</form>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EffectCode)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSort"]">
+                    @Html.DisplayNameFor(model => model.EffectName)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EffectDescription)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffectCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EffectDescription)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EffectID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EffectID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EffectID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

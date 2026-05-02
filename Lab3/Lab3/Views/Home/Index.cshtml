@@ -1,0 +1,154 @@
+﻿@using Lab3
+@using Lab3.Helpers
+@using Lab3.Models
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mt-4">
+
+    <!-- HEADER -->
+    <div class="p-5 mb-4 bg-light rounded-3 text-center">
+        <h1 class="display-5 fw-bold">Decision Support System</h1>
+        <p class="fs-5">Multi-criteria decision making for RPG card selection</p>
+
+        @if (!AuthHelper.IsAdmin(Context))
+        {
+            <a asp-controller="UserRanking" asp-action="Index" class="btn btn-primary btn-lg">
+                Start
+            </a>
+        }
+    </div>
+    
+    @if (AuthHelper.IsLoggedIn(Context))
+    {
+        @if (AuthHelper.IsAdmin(Context))
+        {
+            <!-- BLOCKS -->
+            <div class="row text-center">
+
+                <!-- USERS -->
+                <div class="col-md-4 mb-4">
+                    <h3>Users (LPRs)</h3>
+                    <p>People who make decisions and evaluate alternatives.</p>
+                    <a asp-controller="Users" asp-action="Index" class="btn btn-outline-secondary">
+                        View Data
+                    </a>
+                </div>
+
+                <!-- CARDS -->
+                <div class="col-md-4 mb-4">
+                    <h3>Alternatives</h3>
+                    <p>List of available cards to choose from.</p>
+                    <a asp-controller="Cards" asp-action="Index" class="btn btn-outline-secondary">
+                        View Data
+                    </a>
+                </div>
+
+                <!-- CRITERIA -->
+                <div class="col-md-4 mb-4">
+                    <h3>Criteria</h3>
+                    <p>Set of criteria used to evaluate cards.</p>
+                    <a asp-controller="Effects" asp-action="Index" class="btn btn-outline-secondary">
+                        View Data
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- BLOCKS -->
+            <div class="row text-center">
+
+                <!-- EVALUATION -->
+                <div class="col-md-4 mb-4">
+                    <h3>Evaluation</h3>
+                    <p>Evaluate cards based on selected criteria.</p>
+                    <a asp-controller="CardEffects" asp-action="Index" class="btn btn-outline-secondary">
+                        View Data
+                    </a>
+                </div>
+
+                <!-- RESULTS -->
+                <div class="col-md-4 mb-4">
+                    <h3>Results</h3>
+                    <p>View all rankings and decision results.</p>
+                    <a asp-controller="CardRankings" asp-action="Index" class="btn btn-outline-secondary">
+                        View Results
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12 mb-4">
+                    <div class="collective-home-teaser collective-home-teaser--admin rounded-4 p-4 p-md-5 text-white d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between gap-4">
+                        <div>
+                            <h3 class="h4 fw-bold mb-2">Collective voting</h3>
+                            <p class="mb-0 opacity-90">
+                                View the aggregated voting profile and group outcomes using the Borda and Copeland rules.
+                            </p>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <a asp-controller="CollectiveVoting" asp-action="Index" class="btn btn-light btn-lg rounded-pill px-4 shadow-sm">
+                                Open module
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <!-- BLOCKS -->
+            <div class="row text-center ">
+
+                <!-- PAIRWISE COMPARISON -->
+                <div class="col-md-4 mb-4">
+                    <h3>Pairwise comparison</h3>
+                    <p>Compare cards using incidence matrix method.</p>
+                    <a asp-controller="PairwiseСomparison" asp-action="Compare" class="btn btn-outline-primary">
+                        Start comparison
+                    </a>
+                </div>
+
+                <!-- WEIGHTED DECISION -->
+                <div class="col-md-4 mb-4">
+                    <h3>Weighted Decision</h3>
+                    <p>Decision using weighted criteria.</p>
+                    <a asp-controller="WeightedDecision" asp-action="Criteria" class="btn btn-outline-primary">
+                        Start decision
+                    </a>
+                </div>
+
+                <!-- RANKING -->
+                <div class="col-md-4 mb-4">
+                    <h3>Ranking</h3>
+                    <p>Rank cards based on your preferences.</p>
+                    <a asp-controller="UserRanking" asp-action="Index" class="btn btn-outline-primary">
+                        Rank Cards
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-12 mb-4">
+                    <div class="collective-home-teaser rounded-4 p-4 p-md-5 text-white d-flex flex-column flex-lg-row align-items-lg-center justify-content-lg-between gap-4">
+                        <div>
+                            <h3 class="h4 fw-bold mb-2">Collective voting</h3>
+                            <p class="mb-0 opacity-90">
+                                Voting profile from all saved rankings and group choice by the Borda and Copeland rules.
+                            </p>
+                        </div>
+                        <div class="flex-shrink-0">
+                            <a asp-controller="CollectiveVoting" asp-action="Index" class="btn btn-light btn-lg rounded-pill px-4 shadow-sm">
+                                Open module
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>

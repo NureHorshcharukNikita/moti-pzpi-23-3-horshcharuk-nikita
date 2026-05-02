@@ -1,0 +1,161 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* —— Collective voting module (Lab 3) —— */
+.collective-kicker {
+  letter-spacing: 0.08em;
+}
+
+.collective-hero {
+  background: linear-gradient(125deg, #1e3a5f 0%, #2563eb 45%, #7c3aed 100%);
+  box-shadow: 0 1rem 2.5rem rgba(37, 99, 235, 0.25);
+}
+
+.collective-stat-card {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.12);
+}
+
+.collective-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.collective-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 1rem 2rem rgba(15, 23, 42, 0.12) !important;
+}
+
+.collective-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  background: linear-gradient(135deg, #e0e7ff, #dbeafe);
+}
+
+.collective-icon--borda {
+  background: linear-gradient(135deg, #dcfce7, #d1fae5);
+}
+
+.collective-icon--copeland {
+  background: linear-gradient(135deg, #ffedd5, #fee2e2);
+}
+
+.collective-table thead th {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #64748b;
+  border-bottom-width: 1px;
+}
+
+.collective-table tbody tr:hover {
+  background-color: rgba(37, 99, 235, 0.04);
+}
+
+.collective-th-user,
+.collective-td-user {
+  min-width: 10rem;
+}
+
+.collective-winner-banner {
+  background: linear-gradient(90deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.collective-winner-banner--copeland {
+  background: linear-gradient(90deg, #fff7ed 0%, #ffedd5 50%, #fed7aa 100%);
+  border: 1px solid rgba(234, 88, 12, 0.35);
+}
+
+.collective-badge {
+  background: #059669;
+  color: #fff;
+}
+
+.collective-badge--copeland {
+  background: #ea580c;
+}
+
+.collective-home-teaser {
+  background: linear-gradient(125deg, #1e3a5f 0%, #2563eb 48%, #6366f1 100%);
+  box-shadow: 0 0.75rem 2rem rgba(30, 58, 95, 0.35);
+}
+
+.collective-home-teaser--admin {
+  background: linear-gradient(125deg, #0f172a 0%, #334155 40%, #475569 100%);
+  box-shadow: 0 0.75rem 2rem rgba(15, 23, 42, 0.35);
+}
+
+/* Unified action buttons on collective voting pages */
+.btn.collective-btn {
+  font-weight: 500;
+  text-align: center;
+}
+
+.btn.collective-btn:disabled {
+  opacity: 0.55;
+}
+
+/* Title row: description + toolbar on one visual band (large screens) */
+.collective-page-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 992px) {
+  .collective-page-actions {
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .collective-page-actions__text {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .collective-page-actions__tools {
+    flex: 0 0 auto;
+    width: 33.333%;
+    max-width: 22rem;
+    min-width: 15rem;
+  }
+}
+
+/* Toolbar: exactly three equal buttons in one row (Profile / Borda / Copeland) */
+.collective-toolbar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.collective-toolbar .btn.collective-btn {
+  font-size: 0.78rem;
+  font-weight: 500;
+  line-height: 1.2;
+  padding: 0.28rem 0.35rem;
+  white-space: nowrap;
+  min-width: 0;
+}

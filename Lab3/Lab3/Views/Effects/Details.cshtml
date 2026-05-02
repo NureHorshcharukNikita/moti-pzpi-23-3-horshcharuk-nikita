@@ -1,0 +1,54 @@
+﻿@model Lab3.Models.Effect
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Effect</h4>
+    <hr />
+    <dl class="row">
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EffectCode)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EffectCode)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EffectName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EffectName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EffectDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EffectDescription)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Etalon)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Etalon)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.EffectID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

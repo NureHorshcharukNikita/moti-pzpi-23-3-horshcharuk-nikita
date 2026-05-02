@@ -1,0 +1,26 @@
+﻿@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<form method="post">
+    <input name="Username" placeholder="Username" />
+    <input name="Password" type="password" placeholder="Password" />
+
+    <select name="EvaluatorID">
+        <option value="">-- None --</option>
+
+        @foreach (var ev in ViewBag.Evaluators)
+        {
+            <option value="@ev.EvaluatorID">@ev.EvaluatorName</option>
+        }
+    </select>
+
+    <button type="submit">Register</button>
+</form>
+
+@if (ViewBag.Error != null)
+{
+    <p style="color:red">@ViewBag.Error</p>
+}

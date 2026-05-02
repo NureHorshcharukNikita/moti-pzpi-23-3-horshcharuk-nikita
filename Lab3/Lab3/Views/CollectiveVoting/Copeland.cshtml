@@ -1,0 +1,107 @@
+@model Lab3.Models.CopelandResultViewModel
+@{
+    ViewData["Title"] = "Copeland rule";
+}
+
+<div class="collective-hub py-2">
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-action="Index">Collective voting</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Copeland</li>
+        </ol>
+    </nav>
+
+    <h1 class="h2 fw-bold mb-3">Copeland result</h1>
+    <div class="collective-page-actions mb-4">
+        <p class="text-muted mb-0 collective-page-actions__text">
+            For each pair of cards we count how many users ranked one card above the other.
+            Duel scoring: <strong>+1</strong> for a win, <strong>0</strong> for a tie, <strong>−1</strong> for a loss.
+        </p>
+        <div class="collective-page-actions__tools">
+            <div class="collective-toolbar">
+                <a class="btn btn-sm btn-outline-primary rounded-pill collective-btn" asp-action="Index" title="Back to module">Back</a>
+                <a class="btn btn-sm btn-outline-primary rounded-pill collective-btn" asp-action="Profile" title="Voting profile">Profile</a>
+                <a class="btn btn-sm btn-outline-primary rounded-pill collective-btn" asp-action="Borda" title="Borda result">Borda</a>
+            </div>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(Model.WinnerName))
+    {
+        <div class="collective-winner-banner collective-winner-banner--copeland rounded-4 p-4 mb-4">
+            <div class="row align-items-center g-3">
+                <div class="col-md-8">
+                    <p class="text-uppercase small fw-semibold mb-1 opacity-75">Collective winner</p>
+                    <h2 class="h4 mb-0 fw-bold">@Model.WinnerName</h2>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <span class="badge collective-badge collective-badge--copeland fs-6 rounded-pill px-3 py-2">Copeland rule</span>
+                </div>
+            </div>
+        </div>
+    }
+
+    <h2 class="h5 fw-bold mb-3">Pairwise comparisons</h2>
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden mb-4">
+        <div class="table-responsive">
+            <table class="table table-hover collective-table mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="ps-4">Card A</th>
+                        <th scope="col">Card B</th>
+                        <th scope="col" class="text-center">Votes for A</th>
+                        <th scope="col" class="text-center">Votes for B</th>
+                        <th scope="col" class="text-end pe-4">Outcome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model.Duels)
+                    {
+                        string verdict;
+                        if (d.VotesPreferA > d.VotesPreferB)
+                            verdict = $"Majority: {d.CardA}";
+                        else if (d.VotesPreferB > d.VotesPreferA)
+                            verdict = $"Majority: {d.CardB}";
+                        else
+                            verdict = "Tie";
+                        <tr>
+                            <td class="ps-4 fw-medium">@d.CardA</td>
+                            <td class="fw-medium">@d.CardB</td>
+                            <td class="text-center font-monospace">@d.VotesPreferA</td>
+                            <td class="text-center font-monospace">@d.VotesPreferB</td>
+                            <td class="text-end pe-4 text-muted small">@verdict</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <h2 class="h5 fw-bold mb-3">Copeland scores</h2>
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover collective-table mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="ps-4">Card</th>
+                        <th scope="col" class="text-end pe-4">Copeland score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var topCopeland = Model.Scores.FirstOrDefault()?.CopelandScore ?? 0;
+                    }
+                    @foreach (var row in Model.Scores)
+                    {
+                        var leader = row.CopelandScore == topCopeland;
+                        <tr class="@(leader ? "table-warning" : null)">
+                            <td class="ps-4 fw-medium">@row.CardName</td>
+                            <td class="text-end pe-4 font-monospace">@row.CopelandScore</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+@model IReadOnlyList<Lab3.Models.VotingProfileRowViewModel>
+@{
+    ViewData["Title"] = "Voting profile";
+    var n = (int)ViewBag.AlternativeCount;
+}
+
+<div class="collective-hub py-2">
+    <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+            <li class="breadcrumb-item"><a asp-action="Index">Collective voting</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Profile</li>
+        </ol>
+    </nav>
+
+    <h1 class="h2 fw-bold mb-3">Voting profile</h1>
+    <div class="collective-page-actions mb-4">
+        <p class="text-muted mb-0 collective-page-actions__text">
+            Ordered preferences from all users with a complete ranking of every card.
+        </p>
+        <div class="collective-page-actions__tools">
+            <div class="collective-toolbar">
+                <a class="btn btn-sm btn-outline-primary rounded-pill collective-btn" asp-action="Index" title="Back to module">Back</a>
+                <a class="btn btn-sm btn-outline-primary rounded-pill collective-btn" asp-action="Borda" title="Borda result">Borda</a>
+                <a class="btn btn-sm btn-outline-primary rounded-pill collective-btn" asp-action="Copeland" title="Copeland result">Copeland</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="table-responsive">
+            <table class="table table-hover collective-table mb-0 align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col" class="ps-4 collective-th-user">User</th>
+                        @for (var place = 1; place <= n; place++)
+                        {
+                            <th scope="col" class="text-center text-nowrap">Rank @place</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in Model)
+                    {
+                        <tr>
+                            <th scope="row" class="ps-4 fw-semibold text-primary collective-td-user">@row.Username</th>
+                            @foreach (var name in row.RankedCardNames)
+                            {
+                                <td class="text-center">@name</td>
+                            }
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
